@@ -2,7 +2,7 @@ import React from "react";
 import "./Calendar.css";
 import DayInMonth from "./DayInMonth";
 
-const divideByDay = appointments => {
+const divideByDay = appointments => {//maakt een nieuwe obj met daarin alle appointment objs met de zelfde dagNummer.
   const appointmentsByDay = {};
   appointments.forEach(appointment => {
     const day = appointment.day;
@@ -15,7 +15,7 @@ const divideByDay = appointments => {
 };
 
 export default ({ appointments }) => {
-  const appointmentsByDay = divideByDay(appointments);
+  const appointmentsByDay = divideByDay(appointments);console.log(appointmentsByDay);
 
   const daysInMonthJSX = Object.values(
     appointmentsByDay

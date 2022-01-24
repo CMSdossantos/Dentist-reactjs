@@ -3,14 +3,14 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Home from "./Home";
-import Calendar from "./Calendar";
-import Day from "./Day";
+import Calendar from "./components/Calendar";
+import Day from "./components/Day";
 
 import generateRandomAppointments from "./utils";
 
-const appointments = generateRandomAppointments(70);
+const appointments = generateRandomAppointments(7);
 
-const App = () => (
+const App = () => (// note dat het een functional component is. (-,-) 
   <Router>
     <div>
       <nav>
@@ -43,3 +43,4 @@ const App = () => (
   </Router>
 );
 export default App;
+
