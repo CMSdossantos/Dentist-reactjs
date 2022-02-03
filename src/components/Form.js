@@ -24,12 +24,12 @@ const Form = (props) => {
             <option>Assistent toevoegen</option>
             <option name="testing">Client toevoegen</option>
         </select> <br/>
-        <input name='sur' onChange={getInfo} placeholder="Surname" ></input> <br/>
+        <input name='first' onChange={getInfo} placeholder="Surname" ></input> <br/>
         <input name='last' onChange={getInfo} placeholder="Last name"></input> <br/>
         <input name='email' onChange={getInfo} placeholder="email"></input> <span>@tandartspraktijkbvt.nl </span> <br/>
         <input name='phone' onChange={getInfo} placeholder="Phone number"></input>
         
-        <button onClick={() => {props.setState(addInfo()); console.log(props.state); } } > Add person </button>
+        <button onClick={() => {props.setState(addInfo()); console.log(props.state) } } > Add person </button>
     </div> );
 }
  
