@@ -5,12 +5,14 @@
 
 .block {
     width: 50%;
-    border: 3px solid red;
+    border: 3px solid aquamarine;
+    background-color: lightyellow;
+    padding: 0.5rem;
 }
 
 span {
     font-size: 0.8rem;
-    color: white;
+    color: black;
 }
 
 ul {

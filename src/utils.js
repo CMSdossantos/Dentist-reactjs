@@ -1008,6 +1008,16 @@ const getRandomTime = () => {
 
 const getRandomDay = () => Math.floor(Math.random() * 28) + 1;
 
+export const getRandomStaff = (num) => {
+  let staffArray = [];
+  for(let i=0; i < num ; i++ ) {
+    let person = names[Math.floor(Math.random()*250)];
+    let whichStaff = i % 2 === 0 ? "Tandarts" : "Assistent"
+    staffArray.push({ first: person.name, last: person.surname, persontype: whichStaff })
+  }
+  return staffArray
+};
+
 const generateRandomAppointment = () => ({
   day: getRandomDay(),
   time: getRandomTime(),
@@ -1021,4 +1031,4 @@ const generateRandomAppointments = num =>
     .fill(0)
     .map(_ => generateRandomAppointment());
 
-export default generateRandomAppointments;
+export  {generateRandomAppointments};

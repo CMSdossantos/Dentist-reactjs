@@ -6,13 +6,13 @@ import Home from "./Home";
 import Calendar from "./components/Calendar";
 import Day from "./components/Day";
 
-import generateRandomAppointments from "./utils";
-// import AppLogic from './components/AppLogic';
+import {generateRandomAppointments, getRandomStaff} from "./utils";
+
 
 const appointments = generateRandomAppointments(7);
 
-const App = () => { // note dat het een functional component is. (-,-) 
-  const [state, setState] = useState({staff: [], });
+const App = () => { //hieronder staff > getrandomStaff
+  const [state, setState] = useState({staff: getRandomStaff(8) });
   
 
   return (
