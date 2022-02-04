@@ -3,24 +3,34 @@ import "./Calendar.css";
 import DayInMonth from "./DayInMonth";
 
 const divideByDay = appointments => {//maakt een nieuwe obj met daarin alle appointment objs met de zelfde dagNummer.
-  const appointmentsByDay = {};
-  appointments.forEach(appointment => {
-    const day = appointment.day;
-    if (!appointmentsByDay.hasOwnProperty(day)) {
-      appointmentsByDay[day] = [];
-    }
-    appointmentsByDay[day].push(appointment);
-  });
-  return appointmentsByDay;
+  
+  let appointmentsByDay = {}; //total return is een obj die dagnum als property heeft en value DE obj.
+  for(let i=1;i<29; i++){
+    
+    appointments.forEach(appointment => {// dit moet een for loop worden.
+      if(!appointmentsByDay.hasOwnProperty(i)){
+        // console.log(`${i} = app.day`);// console.log(appointment);
+        appointmentsByDay[i] = [{day: i}]
+      }
+
+      if(i=== appointment.day){
+        appointmentsByDay[appointment.day].push(appointment)
+      }
+
+    }); 
+  }  console.log(appointmentsByDay); 
+  return appointmentsByDay; 
+
+  
 };
 
 export default ({ appointments }) => {
-  const appointmentsByDay = divideByDay(appointments);console.log(appointmentsByDay);
+  const appointmentsByDay = divideByDay(appointments);
 
   const daysInMonthJSX = Object.values(
     appointmentsByDay
   ).map((appointmentsInDay, index) => (
-    <DayInMonth appointments={appointmentsInDay} key={index} />
+      <DayInMonth appointments={appointmentsInDay} key={index} />
   ));
 
   return (
