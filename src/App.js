@@ -11,7 +11,7 @@ import {generateRandomAppointments, getRandomStaff} from "./utils";
 
 const appointments = generateRandomAppointments(7);
 
-const App = () => { //hieronder staff > getrandomStaff
+const App = () => {
   const [state, setState] = useState({staff: getRandomStaff(8) });
   
 

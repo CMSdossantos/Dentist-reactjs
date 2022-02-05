@@ -7,9 +7,8 @@ const divideByDay = appointments => {//maakt een nieuwe obj met daarin alle appo
   let appointmentsByDay = {}; //total return is een obj die dagnum als property heeft en value DE obj.
   for(let i=1;i<29; i++){
     
-    appointments.forEach(appointment => {// dit moet een for loop worden.
+    appointments.forEach(appointment => {
       if(!appointmentsByDay.hasOwnProperty(i)){
-        // console.log(`${i} = app.day`);// console.log(appointment);
         appointmentsByDay[i] = [{day: i}]
       }
 
@@ -18,7 +17,7 @@ const divideByDay = appointments => {//maakt een nieuwe obj met daarin alle appo
       }
 
     }); 
-  }  console.log(appointmentsByDay); 
+  }  //console.log(appointmentsByDay); 
   return appointmentsByDay; 
 
   
@@ -32,6 +31,7 @@ export default ({ appointments }) => {
   ).map((appointmentsInDay, index) => (
       <DayInMonth appointments={appointmentsInDay} key={index} />
   ));
+   
 
   return (
     <div className="calendarview">
