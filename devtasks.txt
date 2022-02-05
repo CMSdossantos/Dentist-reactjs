@@ -8,3 +8,6 @@ git push vraagt nog steeds om een password. (via wincboard uitzoeken hoe dat zit
 Testing bovenstaande2.
 
 index.js:1 Warning: Each child in a list should have a unique "key" prop.
+devidebyday moet ik aanpassen, zodat er elke dag een lege obj is voor de kalender. (nieuwe branch gemaakt ervoor)
+
+branchtesting..
