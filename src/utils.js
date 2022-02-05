@@ -1018,17 +1018,17 @@ export const getRandomStaff = (num) => {
   return staffArray
 };
 
-const generateRandomAppointment = () => ({
+const generateRandomAppointment = (e, idx) => ({
   day: getRandomDay(),
   time: getRandomTime(),
   patient: getRandomName(),
-  dentist: getRandomName(),
+  id: idx,
   assistant: getRandomName(),
 });
 
 const generateRandomAppointments = num =>
   Array(num)
     .fill(0)
-    .map(_ => generateRandomAppointment());
+    .map((e, idx) => generateRandomAppointment(e ,idx));
 
 export  {generateRandomAppointments};

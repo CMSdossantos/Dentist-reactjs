@@ -11,7 +11,7 @@ import {generateRandomAppointments, getRandomStaff} from "./utils";
 
 const appointments = generateRandomAppointments(7);
 
-const App = () => { //hieronder staff > getrandomStaff
+const App = () => {
   const [state, setState] = useState({staff: getRandomStaff(8) });
   
 
@@ -37,7 +37,7 @@ const App = () => { //hieronder staff > getrandomStaff
               <Calendar appointments={appointments} />
             </Route>
             <Route path="/day">
-              <Day appointments={appointments.filter(app => app.day === 1)} />
+              <Day appointments={appointments.filter(app => app.day !== 1)} />
             </Route>
             <Route path="/">
               <Home appointments={appointments} state={state} setState={setState} />
