@@ -3,6 +3,7 @@ import "./Day.css";
 import AppointmentInDay from "./AppointmentInDay";
 
 export default ({ appointments }) => {
+  appointments.sort((a,b) => a.time - b.time);
   const appointmentsJSX = appointments.map(
     ({ time, patient, dentist, assistant }, index) => (
       <AppointmentInDay
