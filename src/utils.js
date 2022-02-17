@@ -1018,12 +1018,46 @@ export const getRandomStaff = (num) => {
   return staffArray
 };
 
-const generateRandomAppointment = (e, idx) => ({
-  day: getRandomDay(),
+const currStaff = getRandomStaff(6);
+
+const getAvailableStaff = (type) => {
+  let day = getRandomDay()
+  let time = getRandomTime()
+
+  if(type === "Assistent" && Math.floor(Math.random()* 10) < 5 ){
+    return ({first: "", last: ""})
+  }
+  
+  const availableStaff = (type) => {
+    return currStaff.find( (person) => {
+    
+      let dayBool = person.day === day ? false : true;
+      let timeBool = person.time === time ? false : true;
+      let isTandarts = person.persontype === type ? true : false;
+  
+      
+      if(dayBool && timeBool && isTandarts) {
+          person.day = day
+          person.time = time
+          return true
+        } else { 
+          return false
+        }
+    })
+
+  } 
+  return availableStaff(type);
+}; 
+
+const concatName = obj => obj.first + " " + obj.last;
+
+const generateRandomAppointment = (date, idx) => ({
+  day: getAvailableStaff("Tandarts").day,
   time: getRandomTime(),
   patient: getRandomName(),
   id: idx,
-  assistant: getRandomName(),
+  dentist: concatName(getAvailableStaff("Tandarts")),
+  assistant: concatName(getAvailableStaff("Assistent")), //hier gebleven
 });
 
 const generateRandomAppointments = num =>
