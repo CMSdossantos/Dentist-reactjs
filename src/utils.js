@@ -1004,6 +1004,7 @@ const getRandomTime = () => {
       return hour;
     }
   }
+  
 };
 
 const getRandomDay = () => Math.floor(Math.random() * 28) + 1;
@@ -1012,25 +1013,31 @@ export const getRandomStaff = (num) => {
   let staffArray = [];
   for(let i=0; i < num ; i++ ) {
     let person = names[Math.floor(Math.random()*250)];
-    let whichStaff = i % 2 === 0 ? "Tandarts" : "Assistent"
-    staffArray.push({ first: person.name, last: person.surname, persontype: whichStaff })
+    let whichStaff = i % 2 === 0 ? "Tandarts" : "Assistent";
+    staffArray.push({
+       first: person.name,
+       last: person.surname, 
+       persontype: whichStaff,
+       email: `${person.name + person.surname}@dentistcompanybvt.com`,
+       phone: `06-${Math.floor(Math.random()*99999999)}`
+       })
   }
   return staffArray
 };
 
 const currStaff = getRandomStaff(6);
 
-const getAvailableStaff = (type) => {
+const getAvailableStaff = (type,date) => {
   let day = getRandomDay()
   let time = getRandomTime()
 
   if(type === "Assistent" && Math.floor(Math.random()* 10) < 5 ){
-    return ({first: "", last: ""})
+    return ({first: "-", last: ""})
   }
-  
   const availableStaff = (type) => {
-    return currStaff.find( (person) => {
-    
+  
+    return currStaff.find( (person) => { 
+      
       let dayBool = person.day === day ? false : true;
       let timeBool = person.time === time ? false : true;
       let isTandarts = person.persontype === type ? true : false;
@@ -1046,19 +1053,25 @@ const getAvailableStaff = (type) => {
     })
 
   } 
-  return availableStaff(type);
-}; 
+  return availableStaff(type,date);
+}; console.log(getAvailableStaff("Assistent"));
 
 const concatName = obj => obj.first + " " + obj.last;
 
-const generateRandomAppointment = (date, idx) => ({
-  day: getAvailableStaff("Tandarts").day,
-  time: getRandomTime(),
-  patient: getRandomName(),
+const generateRandomAppointment = (_, idx) => {
+  const date = {day: getRandomDay(), time: getRandomTime()}
+
+  return {
+  day: date.day,
+  time: date.time,
   id: idx,
-  dentist: concatName(getAvailableStaff("Tandarts")),
-  assistant: concatName(getAvailableStaff("Assistent")), //hier gebleven
-});
+  patient: getRandomName(),
+  email: `randomname@gmail.com`,
+  phone: `06-${Math.floor(Math.random()*99999999)}`,
+  dentist: concatName(getAvailableStaff("Tandarts",date)),
+  assistant: concatName(getAvailableStaff("Assistent"),date),
+  }
+}
 
 const generateRandomAppointments = num =>
   Array(num)
