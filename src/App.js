@@ -9,7 +9,8 @@ import Day from "./components/Day";
 import {generateRandomAppointments, getRandomStaff} from "./utils";
 
 
-const appointments = generateRandomAppointments(7);
+const appointments = generateRandomAppointments(3);
+
 
 const App = () => {
   const [state, setState] = useState({staff: getRandomStaff(8) });
