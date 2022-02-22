@@ -6,14 +6,15 @@ import Home from "./Home";
 import Calendar from "./components/Calendar";
 import Day from "./components/Day";
 
-import {generateRandomAppointments, getRandomStaff} from "./utils";
+import {generateRandomAppointments, currStaff} from "./utils";
 
 
-const appointments = generateRandomAppointments(3);
+const appointments = generateRandomAppointments(2);
+// console.log(currStaff);
 
 
 const App = () => {
-  const [state, setState] = useState({staff: getRandomStaff(8) });
+  const [state, setState] = useState({app: appointments, staff: currStaff });
   
 
   return (

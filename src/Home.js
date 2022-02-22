@@ -8,8 +8,7 @@ export default (props) => {
 
     return (<div style={{display: "flex"}} >
         <Form state={props.state} setState={props.setState} />
-        <SideSection state={props.state} />
-        <span>{console.log(props.state.staff)}</span>
+        <SideSection state={props.state} setState={props.setState} />
     </div>)
 
 }

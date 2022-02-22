@@ -1019,13 +1019,14 @@ export const getRandomStaff = (num) => {
        last: person.surname, 
        persontype: whichStaff,
        email: `${person.name + person.surname}@dentistcompanybvt.com`,
-       phone: `06-${Math.floor(Math.random()*99999999)}`
+       phone: `06-${Math.floor(Math.random()*99999999)}`,
+       present: true
        })
   }
   return staffArray
 };
 
-const currStaff = getRandomStaff(6);
+export const currStaff = getRandomStaff(2);
 
 const getAvailableStaff = (type,date) => {
   let day = getRandomDay()
@@ -1054,7 +1055,7 @@ const getAvailableStaff = (type,date) => {
 
   } 
   return availableStaff(type,date);
-}; console.log(getAvailableStaff("Assistent"));
+};
 
 const concatName = obj => obj.first + " " + obj.last;
 
