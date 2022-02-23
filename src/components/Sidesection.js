@@ -7,7 +7,7 @@ const SideSection = (props) => {
         let firstWord = ele.persontype.split(" ")[0];
         let present = ele.present ? `aanwezig` : `afwezig`;
 
-        const modifiedArr = state.staff.map( (obj, i) => {
+        const modifiedArr = state.staff.map( (obj, i) => { 
             return i === idx ? {...obj, present: !obj.present} : obj
         })
         
@@ -17,7 +17,7 @@ const SideSection = (props) => {
                 {firstWord}: {ele.first} {ele.last}
 
             </li>) : null
-    }); console.log(state.staff);
+    });
     
 
     return (<div className="block">

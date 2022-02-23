@@ -1020,47 +1020,47 @@ export const getRandomStaff = (num) => {
        persontype: whichStaff,
        email: `${person.name + person.surname}@dentistcompanybvt.com`,
        phone: `06-${Math.floor(Math.random()*99999999)}`,
-       present: true
+       present: true,
+       day: [],
+       time: [],
        })
   }
   return staffArray
 };
 
-export const currStaff = getRandomStaff(2);
+export const currStaff = getRandomStaff(6);
 
 const getAvailableStaff = (type,date) => {
-  let day = getRandomDay()
-  let time = getRandomTime()
 
   if(type === "Assistent" && Math.floor(Math.random()* 10) < 5 ){
     return ({first: "-", last: ""})
   }
-  const availableStaff = (type) => {
+  const availableStaff = (type,date) => {
   
-    return currStaff.find( (person) => { 
-      
-      let dayBool = person.day === day ? false : true;
-      let timeBool = person.time === time ? false : true;
+    return currStaff.find( (person) => {
+
+      let dayBool = !person.day.includes(date.day) ? true : false; 
+      let timeBool = !person.time.includes(date.time) ? true : false; 
       let isTandarts = person.persontype === type ? true : false;
-  
       
       if(dayBool && timeBool && isTandarts) {
-          person.day = day
-          person.time = time
+          person.day.push(date.day)
+          person.time.push(date.time)
           return true
-        } else { 
+        } else {
           return false
         }
     })
 
-  } 
+  };
   return availableStaff(type,date);
 };
 
-const concatName = obj => obj.first + " " + obj.last;
+const concatName = obj => obj ? obj.first + " " + obj.last : "No staff available " ; 
+
 
 const generateRandomAppointment = (_, idx) => {
-  const date = {day: getRandomDay(), time: getRandomTime()}
+  const date = {day: getRandomDay(), time: getRandomTime()};
 
   return {
   day: date.day,
@@ -1070,7 +1070,7 @@ const generateRandomAppointment = (_, idx) => {
   email: `randomname@gmail.com`,
   phone: `06-${Math.floor(Math.random()*99999999)}`,
   dentist: concatName(getAvailableStaff("Tandarts",date)),
-  assistant: concatName(getAvailableStaff("Assistent"),date),
+  assistant: concatName(getAvailableStaff("Assistent",date)),
   }
 }
 

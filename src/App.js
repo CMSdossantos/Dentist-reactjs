@@ -15,7 +15,7 @@ const appointments = generateRandomAppointments(2);
 
 const App = () => {
   const [state, setState] = useState({app: appointments, staff: currStaff });
-  
+  console.log(state);
 
   return (
     <Router>
@@ -36,7 +36,7 @@ const App = () => {
         <main>
           <Switch>
             <Route path="/calendar">
-              <Calendar appointments={appointments} />
+              <Calendar appointments={appointments} state={state} setState={setState} />
             </Route>
             <Route path="/day">
               <Day appointments={appointments.filter(app => app.day !== 1)} />
