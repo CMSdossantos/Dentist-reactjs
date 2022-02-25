@@ -1007,7 +1007,16 @@ const getRandomTime = () => {
   
 };
 
-const getRandomDay = () => Math.floor(Math.random() * 28) + 1;
+const getRandomDay = () => {
+  let num = 0;
+  while (num%7%6 === 0){ 
+    num = (Math.floor(Math.random() * 28) + 1) ;
+  }
+  return num
+}
+
+
+
 
 export const getRandomStaff = (num) => {
   let staffArray = [];
