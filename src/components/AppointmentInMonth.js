@@ -11,14 +11,15 @@ export default ( {appoint, state, setState }, idx ) => {
   const presentcss = typeof chosenStaff !== "undefined" && chosenStaff.present ? null : {background: "tomato"};
   // const listValue = (event) => console.log(event.target.parentNode.name); console.log(listValue);
 
-  const removeAppoint = event => {
-    const reducedArray = state.app.map( (elem) => elem.patient === event.target.parentNode.firstChild ? false: true )
+  const removeAppoint = id => {
+    const reducedArray = state.app.filter( (elem) => elem.id === id ? false : true )
     setState((prev) => {return ({...prev, app: reducedArray}) }  ) ;
+    
   }
   
 
-  const showAny = appoint.patient ? (<span name={"haha"} style={presentcss} className="patient" key={idx} >{appoint.patient+" "}
-     <button className="del" onClick={removeAppoint}>x</button> </span>) : null;
+  const showAny = appoint.patient ? (<span name={"haha"} style={presentcss} className="patient" key={idx} >{appoint.patient}
+     <button className="del" onClick={() => removeAppoint(appoint.id)}>x</button> </span>) : null;
   
 
   return(

@@ -1037,7 +1037,7 @@ export const getRandomStaff = (num) => {
   return staffArray
 };
 
-export const currStaff = getRandomStaff(6);
+export const currStaff = getRandomStaff(10);
 
 const getAvailableStaff = (type,date) => {
 

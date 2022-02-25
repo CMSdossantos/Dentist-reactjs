@@ -5,7 +5,7 @@ import DayInMonth from "./DayInMonth";
 const divideByDay = appointments => {//maakt een nieuwe obj met daarin alle appointment objs met de zelfde dagNummer.
   
   let appointmentsByDay = {}; //total return is een obj die dagnum als property heeft en value DE obj.
-  for(let i=1;i<=31; i++){
+  for(let i=1;i<=28; i++){
     if(i%7%6 !== 0){
 
       appointments.forEach(appointment => {
