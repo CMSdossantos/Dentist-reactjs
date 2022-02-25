@@ -22,13 +22,13 @@ const divideByDay = appointments => {//maakt een nieuwe obj met daarin alle appo
   
 };
 
-export default ({ state }) => {// <-- appointments changed to state
+export default ({ state, setState }) => {// <-- appointments changed to state
   const appointmentsByDay = divideByDay(state.app);// here too
 
   const daysInMonthJSX = Object.values(
     appointmentsByDay
   ).map((appointmentsInDay, index) => (
-      <DayInMonth appointments={appointmentsInDay} staff={state.staff} key={index} />
+      <DayInMonth appointments={appointmentsInDay} state={state} setState={setState} key={index} />
   ));// console.log(daysInMonthJSX);
    
 

@@ -15,7 +15,7 @@ const appointments = generateRandomAppointments(2);
 
 const App = () => {
   const [state, setState] = useState({app: appointments, staff: currStaff });
-  console.log(state);
+  
 
   return (
     <Router>
