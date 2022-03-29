@@ -19,3 +19,10 @@ ul {
     list-style-type: none;
     padding-left: 5%;
 }
+
+.makeapp {
+    width: 100%;
+    border: 3px solid aquamarine;
+    background-color: lightyellow;
+    padding: 0.5rem;
+}

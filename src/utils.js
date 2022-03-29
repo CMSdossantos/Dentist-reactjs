@@ -991,10 +991,10 @@ const names = [
   },
 ];
 
-const getRandomName = () => {
-  const person = names[Math.floor(Math.random() * 250)];
-  return `${person.name} ${person.surname}`;
-};
+// const getRandomName = () => {
+//   const person = names[Math.floor(Math.random() * 250)];
+//   return `${person.name} ${person.surname}`;
+// }; mogelijk niet meer in gebruik <--
 
 const getRandomTime = () => {
   let hour;
@@ -1013,10 +1013,23 @@ const getRandomDay = () => {
     num = (Math.floor(Math.random() * 28) + 1) ;
   }
   return num
-}
+} 
 
-
-
+export const getRandomClients = num => {
+  let clientArray = [];
+  for(let i=0; i < num; i++){
+    let person = names[Math.floor(Math.random()*250)];
+    clientArray.push({
+      first: person.name,
+      last: person.surname,
+      email: `${person.name}_${person.surname.split(" ")[0]}@gmail.com`,
+      phone: `06-${Math.floor(Math.random()*99999999)}`,
+      birth: Math.floor(Math.random()* (2022-1935)) + 1935,
+    })
+  }
+  return clientArray;
+}; 
+export const currClients = getRandomClients(10)
 
 export const getRandomStaff = (num) => {
   let staffArray = [];
@@ -1036,7 +1049,6 @@ export const getRandomStaff = (num) => {
   }
   return staffArray
 };
-
 export const currStaff = getRandomStaff(10);
 
 const getAvailableStaff = (type,date) => {
@@ -1070,12 +1082,13 @@ const concatName = obj => obj ? obj.first + " " + obj.last : "No staff available
 
 const generateRandomAppointment = (_, idx) => {
   const date = {day: getRandomDay(), time: getRandomTime()};
+  const randomClient = currClients[Math.floor(Math.random()* currClients.length)]
 
   return {
   day: date.day,
   time: date.time,
   id: idx,
-  patient: getRandomName(),
+  patient: `${randomClient.first} ${randomClient.last}`,
   email: `randomname@gmail.com`,
   phone: `06-${Math.floor(Math.random()*99999999)}`,
   dentist: concatName(getAvailableStaff("Tandarts",date)),

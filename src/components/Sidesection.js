@@ -21,7 +21,7 @@ const SideSection = (props) => {
     
 
     return (<div className="block">
-        <ul>
+        <ul>Personeel:
             {viewInfo}
         </ul>
     </div>)

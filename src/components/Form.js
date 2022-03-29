@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import {currStaff} from '../utils';
-
 
 const Form = (props) => {
     const [FormInfo, setFormInfo] = useState({persontype: 'Tandarts'});
     const {state, setState} = props
-    let staffArr = currStaff
+    let staffArr = state.staff; 
 
     const getInfo = (event) => {
         const {name, value} = event.target;
@@ -21,16 +19,17 @@ const Form = (props) => {
 
     return ( <div className='block'>
         <select name="persontype" onChange={getInfo} >
-            <option>Tandarts toevoegen</option>
-            <option>Assistent toevoegen</option>
-            {/* <option>Client toevoegen</option> */}
+            <option value='Tandarts'>Tandarts toevoegen</option>
+            <option value='Assistent'>Assistent toevoegen</option>
+            <option value='Client' >Client toevoegen</option>
         </select> <br/>
-        <input name='first' onChange={getInfo} placeholder="Name" ></input> <br/>
-        <input name='last' onChange={getInfo} placeholder="Last name"></input> <br/>
+        <input name='first' onChange={getInfo} placeholder="Name" required></input> <br/>
+        <input name='last' onChange={getInfo} placeholder="Last name" required></input> <br/>
         <input name='email' onChange={getInfo} placeholder="Email"></input> <span>@tandartspraktijkbvt.nl </span> <br/>
-        <input name='phone' onChange={getInfo} placeholder="Phone number"></input>
+        <input name='phone' onChange={getInfo} placeholder="Phone number"></input> <br/>
+        <input name='birthdate' type='number'  min='1940' max='2015' placeholder='geb. jaar' onChange={getInfo} ></input>
         
-        <button onClick={() => {setState(addInfo()); console.log(state);} } > Add person </button>
+        <button onClick={() => {setState(addInfo()); console.log(state);} } > Persoon opslaan </button>
     </div> );
 }
  
