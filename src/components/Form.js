@@ -1,35 +1,42 @@
 import React, {useState} from 'react';
-// import Home from '../Home.js';
-
 
 const Form = (props) => {
-    const [FormInfo, setFormInfo] = useState({persontype: 'Tandarts toevoegen'});
-    let staffArr = props.state.staff;
+    const [formInfo, setFormInfo] = useState({persontype: 'dentist'});
+    const {state, setState} = props
+    // let staffArr = state.staff;
+    // let clientsArr = state.clients;
 
     const getInfo = (event) => {
         const {name, value} = event.target;
-        setFormInfo({...FormInfo, [name] : value} );
-        // console.log(FormInfo);
+        setFormInfo({...formInfo, [name] : value} );
+        console.log(formInfo);
     };
 
-    const addInfo = (prev) =>{
-        staffArr.push(FormInfo);
-        return {...prev, staff: staffArr}
-        
+    const addInfo = (prev) => {
+        if(formInfo.persontype === 'client'){
+            let clientsArr = prev.clients
+            clientsArr.push(formInfo); 
+            return {...prev, clients: clientsArr}
+        } else {
+            let staffArr = prev.staff
+            staffArr.push(formInfo);
+            return {...prev, staff: staffArr}
+        }
     };
 
     return ( <div className='block'>
         <select name="persontype" onChange={getInfo} >
-            <option>Tandarts toevoegen</option>
-            <option>Assistent toevoegen</option>
-            <option name="testing">Client toevoegen</option>
+            <option value='dentist'>Tandarts toevoegen</option>
+            <option value='assistent'>Assistent toevoegen</option>
+            <option value='client' >Client toevoegen</option>
         </select> <br/>
-        <input name='first' onChange={getInfo} placeholder="Surname" ></input> <br/>
-        <input name='last' onChange={getInfo} placeholder="Last name"></input> <br/>
-        <input name='email' onChange={getInfo} placeholder="email"></input> <span>@tandartspraktijkbvt.nl </span> <br/>
-        <input name='phone' onChange={getInfo} placeholder="Phone number"></input>
+        <input name='first' onChange={getInfo} placeholder="Name" required></input> <br/>
+        <input name='last' onChange={getInfo} placeholder="Last name" required></input> <br/>
+        <input name='email' onChange={getInfo} placeholder="Email"></input> <span>@tandartspraktijkbvt.nl </span> <br/>
+        <input name='phone' onChange={getInfo} placeholder="Phone number"></input> <br/>
+        <input name='birthdate' type='number'  min='1940' max='2015' placeholder='geb. jaar' onChange={getInfo} ></input>
         
-        <button onClick={() => {props.setState(addInfo()); console.log(props.state) } } > Add person </button>
+        <button onClick={() => { setState(prev => addInfo(prev)) } } > Persoon opslaan </button>
     </div> );
 }
  

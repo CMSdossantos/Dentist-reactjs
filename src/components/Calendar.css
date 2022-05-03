@@ -33,3 +33,9 @@
 .calendarview .time {
   color: yellowgreen;
 }
+
+.del {
+  padding-left: 4px;
+  padding-right: 4px;
+  border: none;
+}

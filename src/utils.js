@@ -991,10 +991,6 @@ const names = [
   },
 ];
 
-const getRandomName = () => {
-  const person = names[Math.floor(Math.random() * 250)];
-  return `${person.name} ${person.surname}`;
-};
 
 const getRandomTime = () => {
   let hour;
@@ -1007,69 +1003,89 @@ const getRandomTime = () => {
   
 };
 
-const getRandomDay = () => Math.floor(Math.random() * 28) + 1;
+const getRandomDay = () => {
+  let num = 0;
+  while (num%7%6 === 0){ 
+    num = (Math.floor(Math.random() * 28) + 1) ;
+  }
+  return num
+} 
+
+export const getRandomClients = num => {
+  let clientArray = [];
+  for(let i=0; i < num; i++){
+    let person = names[Math.floor(Math.random()*250)];
+    clientArray.push({
+      first: person.name,
+      last: person.surname,
+      email: `${person.name}_${person.surname.split(" ")[0]}@gmail.com`,
+      phone: `06-${Math.floor(Math.random()*99999999)}`,
+      birth: Math.floor(Math.random()* (2022-1935)) + 1935,
+    })
+  }
+  return clientArray;
+}; 
+export const currClients = getRandomClients(50)
 
 export const getRandomStaff = (num) => {
   let staffArray = [];
   for(let i=0; i < num ; i++ ) {
     let person = names[Math.floor(Math.random()*250)];
-    let whichStaff = i % 2 === 0 ? "Tandarts" : "Assistent";
+    let whichStaff = i % 2 === 0 ? "dentist" : "assistent";
     staffArray.push({
+       date: [],
        first: person.name,
        last: person.surname, 
        persontype: whichStaff,
        email: `${person.name + person.surname}@dentistcompanybvt.com`,
-       phone: `06-${Math.floor(Math.random()*99999999)}`
+       phone: `06-${Math.floor(Math.random()*99999999)}`,
+       present: true,
        })
   }
   return staffArray
 };
-
-const currStaff = getRandomStaff(6);
+export const currStaff = getRandomStaff(10);
 
 const getAvailableStaff = (type,date) => {
-  let day = getRandomDay()
-  let time = getRandomTime()
 
-  if(type === "Assistent" && Math.floor(Math.random()* 10) < 5 ){
+  if(type === "assistent" && Math.floor(Math.random()* 10) < 5 ){
     return ({first: "-", last: ""})
   }
-  const availableStaff = (type) => {
+  const availableStaff = (type,date) => {
   
-    return currStaff.find( (person) => { 
+    return currStaff.find( (person) => {
       
-      let dayBool = person.day === day ? false : true;
-      let timeBool = person.time === time ? false : true;
+      let dateBool = person.date.includes(date); 
       let isTandarts = person.persontype === type ? true : false;
-  
       
-      if(dayBool && timeBool && isTandarts) {
-          person.day = day
-          person.time = time
+      if(!dateBool && isTandarts) {
+          person.date.push(date); 
           return true
-        } else { 
+        } else {
           return false
         }
-    })
+        
+    })    
 
-  } 
+  };
   return availableStaff(type,date);
-}; console.log(getAvailableStaff("Assistent"));
+};
 
-const concatName = obj => obj.first + " " + obj.last;
+const concatName = obj => obj ? obj.first + " " + obj.last : "No staff available " ; 
+
 
 const generateRandomAppointment = (_, idx) => {
-  const date = {day: getRandomDay(), time: getRandomTime()}
+  const date = {day: getRandomDay(), time: getRandomTime()};
+  const randomClient = currClients[Math.floor(Math.random()* currClients.length)]
 
   return {
-  day: date.day,
-  time: date.time,
+  date: {day: date.day, time: date.time},
   id: idx,
-  patient: getRandomName(),
+  patient: `${randomClient.first} ${randomClient.last}`,
   email: `randomname@gmail.com`,
   phone: `06-${Math.floor(Math.random()*99999999)}`,
-  dentist: concatName(getAvailableStaff("Tandarts",date)),
-  assistant: concatName(getAvailableStaff("Assistent"),date),
+  dentist: concatName(getAvailableStaff("dentist",date)),
+  assistant: concatName(getAvailableStaff("assistent",date)),
   }
 }
 

@@ -6,16 +6,15 @@ import Home from "./Home";
 import Calendar from "./components/Calendar";
 import Day from "./components/Day";
 
-import {generateRandomAppointments, getRandomStaff} from "./utils";
+import {generateRandomAppointments, currStaff, currClients} from "./utils";
 
 
-const appointments = generateRandomAppointments(3);
+const appointments = generateRandomAppointments(150);
 
 
 const App = () => {
-  const [state, setState] = useState({staff: getRandomStaff(8) });
+  const [state, setState] = useState({app: appointments, staff: currStaff, clients: currClients, forms: {}});
   
-
   return (
     <Router>
       <div>
@@ -35,7 +34,7 @@ const App = () => {
         <main>
           <Switch>
             <Route path="/calendar">
-              <Calendar appointments={appointments} />
+              <Calendar appointments={appointments} state={state} setState={setState} />
             </Route>
             <Route path="/day">
               <Day appointments={appointments.filter(app => app.day !== 1)} />
