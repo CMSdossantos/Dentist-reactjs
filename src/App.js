@@ -9,14 +9,12 @@ import Day from "./components/Day";
 import {generateRandomAppointments, currStaff, currClients} from "./utils";
 
 
-const appointments = generateRandomAppointments(30);
-
+const appointments = generateRandomAppointments(150);
 
 
 const App = () => {
   const [state, setState] = useState({app: appointments, staff: currStaff, clients: currClients, forms: {}});
   
-  // console.log(state);
   return (
     <Router>
       <div>

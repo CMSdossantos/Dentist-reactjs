@@ -2,6 +2,7 @@ import React from "react";
 
 const SideSection = (props) => {
     const {state, setState} = props;
+    
 
     const viewInfo = state.staff.map( (ele, idx) => {
         let firstWord = ele.persontype.split(" ")[0];

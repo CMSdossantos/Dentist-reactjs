@@ -6,31 +6,31 @@ const divideByDay = appointments => {//maakt een nieuwe obj met daarin alle appo
   
   let appointmentsByDay = {}; //total return is een obj die dagnum als property heeft en value DE obj.
   for(let i=1;i<=28; i++){
-    if(i%7%6 !== 0){
+    if(i%7%6 !== 0){ 
 
       appointments.forEach(appointment => {
           if(!appointmentsByDay.hasOwnProperty(i)){
-            appointmentsByDay[i] = [{day: i}]
-          }
+            appointmentsByDay[i] = [{date: {day : i}}]
+          } else
   
-          if(i=== appointment.day){
-            appointmentsByDay[appointment.day].push(appointment)
+          if(i=== appointment.date.day){ 
+            appointmentsByDay[appointment.date.day].push(appointment)
           }
       }); 
     }
-  }  
+  };
   return appointmentsByDay; 
   
 };
 
 export default ({ state, setState }) => {// <-- appointments changed to state
-  const appointmentsByDay = divideByDay(state.app);// here too
+  const appointmentsByDay = divideByDay(state.app);   // here too
 
   const daysInMonthJSX = Object.values(
     appointmentsByDay
   ).map((appointmentsInDay, index) => (
       <DayInMonth appointments={appointmentsInDay} state={state} setState={setState} key={index} />
-  ));// console.log(daysInMonthJSX);
+  ));
    
 
   return (

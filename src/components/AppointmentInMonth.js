@@ -7,9 +7,8 @@ const showInfo = (time,patient) => patient  ? format_time(time) : null;
 
 export default ( {appoint, state, setState }, idx ) => {
 
-  const chosenStaff = state.staff.find(ele => ele.first+" "+ ele.last === appoint.dentist) ;
+  const chosenStaff = state.staff.find(ele => ele.first+" "+ ele.last === appoint.dentist) ; 
   const presentcss = typeof chosenStaff !== "undefined" && chosenStaff.present ? null : {background: "tomato"};
-  // const listValue = (event) => console.log(event.target.parentNode.name); console.log(listValue);
 
   const removeAppoint = id => {
     const reducedArray = state.app.filter( (elem) => elem.id === id ? false : true )
@@ -24,7 +23,7 @@ export default ( {appoint, state, setState }, idx ) => {
 
   return(
     <div className="appointment">
-      <span className="time">{showInfo(appoint.time, appoint.patient)}</span>
+      <span className="time">{showInfo(appoint.date.time, appoint.patient)}</span>
       {showAny}
     </div>
   );
