@@ -1,1 +1,1 @@
-git push vraagt nog steeds om een password. (via wincboard uitzoeken hoe dat zit)
+
